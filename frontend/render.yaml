@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: modoai-frontend
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: modoai-backend
+          property: host
