@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
     # Hugging Face API (free tier)
-    HF_API_KEY: Optional[str] = None
+    HF_API_KEY: str = ""
     HF_MODEL: str = "deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct"
     HF_API_URL: str = "https://api-inference.huggingface.co/models"
     
