@@ -2,13 +2,21 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sess
 from sqlalchemy.orm import declarative_base
 from app.core.config import settings
 
-engine = create_async_engine(
-    settings.DATABASE_URL,
-    echo=False,
-    pool_pre_ping=True,
-    pool_size=10,
-    max_overflow=20
-)
+# Configure engine based on database type
+if "sqlite" in settings.DATABASE_URL:
+    engine = create_async_engine(
+        settings.DATABASE_URL,
+        echo=False
+    )
+else:
+    # PostgreSQL configuration with connection pooling
+    engine = create_async_engine(
+        settings.DATABASE_URL,
+        echo=False,
+        pool_pre_ping=True,
+        pool_size=10,
+        max_overflow=20
+    )
 
 AsyncSessionLocal = async_sessionmaker(
     engine,
